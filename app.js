@@ -22,6 +22,53 @@ connection.connect((err) => {
     console.log("Connected to MySQL");
 });
 
+// app.listen(2024, () =>
+//     console.log("listening and running on http://localhost:2024")
+// );
+
+/// // Route: /create-table => To create the tables
+app.get("/create-table", (req, res) => {
+    // Putting Query on a variable
+    let name = `CREATE TABLE if not exists customers(
+    customer_id int auto_increment,
+    name VARCHAR(255) not null,
+    PRIMARY KEY (customer_id)
+    )`;
+
+    let address = `CREATE TABLE if not exists address(
+        address_id int auto_increment,
+        customer_id int(11) not null,
+        address VARCHAR(255) not null,
+        PRIMARY KEY (address_id),
+        FOREIGN KEY (customer_id) REFERENCES customers
+        (customer_id)
+    )`;
+
+    let company = `CREATE TABLE if not exists company(
+        company_id int auto_increment,
+        customer_id int(11) not null,
+        company VARCHAR(255) not null,
+        PRIMARY KEY (company_id),
+        FOREIGN KEY (customer_id) REFERENCES customers
+        (customer_id)
+    )`;
+
+    connection.query(name, (err, results, fields) => {
+        if (err) console.log(`Error Found: ${err}`);
+    });
+
+    connection.query(address, (err, results, fields) => {
+        if (err) console.log(`Error Found: ${err}`);
+    });
+
+    connection.query(company, (err, results, fields) => {
+        if (err) console.log(`Error found: ${err}`);
+    });
+
+    res.end("Tables Created");
+    console.log("Tables Created");
+});
+
 app.listen(2024, () =>
     console.log("listening and running on http://localhost:2024")
 );
