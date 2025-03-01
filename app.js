@@ -2,6 +2,13 @@ const express = require("express");
 const app = express();
 const mysql = require("mysql2");
 
+// // Midle ware to extract info from the html body name attribute
+app.use(
+    express.urlencoded({
+        extended: true,
+    })
+);
+
 // Middleware to parse JSON
 app.use(express.json());
 

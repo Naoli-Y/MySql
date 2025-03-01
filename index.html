@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Form</title>
+</head>
+<body>
+    <div class="d-flex justify-content my-5">
+        <button 
+            type="button"
+            class="btn btn-success"
+            onclick="displayForm('new', 'edit', 'delete', 'list')">
+           New
+        </button>
+        <button
+           id="list"
+           type="button"
+           class="btn btn-primary"
+           onclick="displayForm('list', 'new', 'edit' , 'delete')">
+           list
+        </button>
+        <button
+           type="button"
+           class="btn btn-warning"
+           onclick="displayForm('edit', 'new', 'delete', 'list')">
+           Edit
+        </button>
+    </div>
+
+  <section class="mx-auto my-3 w-75 new">
+    <h1>Insert Customer Info</h1>
+    <form 
+    action="http://localhost:2024/insert-customers-info"
+    method="post"
+    style="zoom: 200%"
+    id="newForm">
+    <label for="name">Name:</label><br />
+    <input type="text" name="name"/><br /><br />
+
+    <label for="address">Address:</label><br />
+    <input type="text" name="address" /><br /><br />
+
+    <label for="company">Company:</label><br />
+    <input type="text" name="company" /><br /><br />
+
+    <button type="submit" class="btn btn-dark" id="newFormBtn">
+        Submit Info
+    </button>
+</form>
+</section>  
+</body>
+</html>
