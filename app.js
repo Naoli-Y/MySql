@@ -105,4 +105,19 @@ app.post("/insert-customers-info", (req, res) => {
     console.log("Data inserted successfully!");
 });
 
+// Route: /customers-detail-into => To retrieve from the tables
+app.get("/customer-detail-info", (req, res) => {
+    connection.query(
+        "SELECT * FROM customers JOIN address JOIN company ON customers.customer_id = address.customer_id AND customers.customer_id = company.customer_id",
+        (err, results, fields) => {
+            console.table(fields);
+
+            if (err) console.log("Error During selection", err);
+            // console.log(results);
+            res.send(results);
+        }
+    );
+})
+
+
 app.listen(2024, () => console.log("listening and running on http://localhost:2024"));
