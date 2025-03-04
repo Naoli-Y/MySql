@@ -119,5 +119,29 @@ app.get("/customer-detail-info", (req, res) => {
     );
 })
 
+// // Route: /customers => To retrieve customized data from the tables
+// app.get("/customers", (req, res) => {
+//     connection.query(
+//         "SELECT customers.customer_id AS id, customers.name, address, company.company FROM customers JION address JOIN company ON customer.customer_id = address.customer_id AND customers.customer_id = company.customer_id",
+//         (err, results, fields) => {
+//             if (err) console.log("Error During selection", err);
+//         }
+//     )
+// })
+
+
+/// Route: /update => To adjust or update data from the rables
+app.put("/update", (req, res) => {
+    // console.table(req.body);
+    const { newName, id } = req.body;
+
+    let updateName = `UPDATE customers SET name = '${newName}' WHERE customer_id = '${id}'`;
+
+    connection.query(updateName, (err, result) => {
+        if (err) throw err;
+        console.log(result.affectedRows + " record(s) updated");
+        res.send(result);
+    });;
+});
 
 app.listen(2024, () => console.log("listening and running on http://localhost:2024"));
